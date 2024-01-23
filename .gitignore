@@ -1,3 +1,4 @@
 slurm-output-*.out
 _pycache_/
 .ipynb_checkpoints/
+__pycache__/
