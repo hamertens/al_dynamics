@@ -11,7 +11,7 @@ The models_functions.py file contains the classes for the ML models, function to
 
 In the setup.py file, the user can specify all the different parameters that are used by the other python files.
 
-Currently, I'm using 4 different anaconda environments for the individual ML models.
+Currently, I'm using 4 different anaconda environments for the individual ML models. You can find the yml files in this repo to install the environments and run the code.
 
 
 
