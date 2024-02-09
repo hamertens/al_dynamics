@@ -3,12 +3,15 @@ import random
 import numpy as np
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF
+from sklearn.gaussian_process.kernels import Matern
+from setup import DATA_FILEPATH, DATAFRAME_COLUMNS
+from setup import TRAINING_TYPE, KERNEL
 
-file_path_train_inputs = '/home/hansm/active_learning/Pendulum/GP/data/train_inputs.csv'
+file_path_train_inputs = DATA_FILEPATH + 'train_inputs.csv'
 df_train_inputs = pd.read_csv(file_path_train_inputs)
 train_inputs = df_train_inputs.values
 
-file_path_train_outputs = '/home/hansm/active_learning/Pendulum/GP/data/train_outputs.csv'
+file_path_train_outputs = DATA_FILEPATH + 'train_outputs.csv'
 df_train_outputs = pd.read_csv(file_path_train_outputs)
 train_outputs = df_train_outputs.values
 
@@ -27,23 +30,39 @@ training_inputs = np.array([train_inputs[random_index1], train_inputs[random_ind
 training_outputs = np.array([train_outputs[random_index1], train_outputs[random_index2]])
 
 # Creating DataFrames for training inputs and outputs
-training_inputs_active_df = pd.DataFrame(training_inputs, columns=['theta', 'omega'])
-training_outputs_active_df = pd.DataFrame(training_outputs, columns=['theta', 'omega'])
+training_inputs_active_df = pd.DataFrame(training_inputs, columns=DATAFRAME_COLUMNS)
+training_outputs_active_df = pd.DataFrame(training_outputs, columns=DATAFRAME_COLUMNS)
 
 # Saving DataFrames to CSV files
-training_inputs_active_df.to_csv('training_inputs_active.csv', index=False)
-training_outputs_active_df.to_csv('training_outputs_active.csv', index=False)
+training_inputs_active_df.to_csv('output_data/training_inputs_active.csv', index=False)
+training_outputs_active_df.to_csv('output_data/training_outputs_active.csv', index=False)
 
-metric_df = pd.DataFrame({'RMSE': [], 'Variance': [], "Train_RMSE": []})
-metric_df.to_csv("metrics.csv", index=False)
+metric_df = pd.DataFrame({'RMSE': [], 'Variance': []})
+metric_df.to_csv("output_data/metrics.csv", index=False)
 
 
+# initialize the kernel
+if KERNEL == 'rbf':
+    kernel = RBF(length_scale=1.0)
+if KERNEL == 'matern':
+    kernel = Matern(length_scale=1.0, nu=1.5)
+    
 # Create the Gaussian Process Regressor
-kernel = RBF(length_scale=1.0)
 gpr = GaussianProcessRegressor(kernel=kernel)
 gpr.fit(training_inputs, training_outputs)
 # Add initial predictions
 Y_pred, _ = gpr.predict(training_inputs, return_std=True)
 predictions = Y_pred
-predictions_df = pd.DataFrame(predictions, columns=['theta', 'omega'])
-predictions_df.to_csv('predictions.csv', index=False)
+predictions_df = pd.DataFrame(predictions, columns=DATAFRAME_COLUMNS)
+predictions_df.to_csv('output_data/predictions.csv', index=False)
+
+if TRAINING_TYPE == 'continuous':
+    if KERNEL == 'matern':
+        learned_length_scale = gpr.kernel_.length_scale
+        learned_nu = gpr.kernel_.nu
+        parameters_df = pd.DataFrame({'length_scale': [learned_length_scale], 'nu': [learned_nu]})
+        parameters_df.to_csv('output_data/parameters.csv', index=False)
+    if KERNEL == 'rbf':
+        learned_length_scale = gpr.kernel_.length_scale
+        parameters_df = pd.DataFrame({'length_scale': [learned_length_scale]})
+        parameters_df.to_csv('output_data/parameters.csv', index=False)

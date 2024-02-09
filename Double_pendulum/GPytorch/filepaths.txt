@@ -1,4 +1,0 @@
-/home/hansm/active_learning/Double_pendulum/GPytorch/gpytorch.sh
-/home/hansm/active_learning/Double_pendulum/GPytorch/init.py
-/home/hansm/active_learning/Double_pendulum/GPytorch/exec.py
-gpytorch

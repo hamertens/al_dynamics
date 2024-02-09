@@ -4,9 +4,9 @@
 #SBATCH --partition=gpu # gpu, kill-shared, shared
 
 #SBATCH --gres=gpu:1 #1 GPU
-#SBATCH --cpus-per-task=1 # Number of cores; probably don't need to change this
-#SBATCH --mem=12gb ## max amount of memory per node you require in gb
-#SBATCH --time=02-22:00:00 ## time format is DD-HH:MM:SS, 3day max on kill-shared
+#SBATCH --cpus-per-task=4 # Number of cores; probably don't need to change this
+#SBATCH --mem=20gb ## max amount of memory per node you require in gb
+#SBATCH --time=02-23:00:00 ## time format is DD-HH:MM:SS, 3day max on kill-shared
 
 #SBATCH --job-name=lorenz_ensemble #Not necessary but any name
 #SBATCH --output=./slurm-output-%A.out #Output file

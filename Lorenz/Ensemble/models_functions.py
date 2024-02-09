@@ -11,9 +11,8 @@ from setup import INPUT_DIMENSIONALITY, OUTPUT_DIMENSIONALITY
 
 def mlp_model():
     inp = Input(shape=(INPUT_DIMENSIONALITY,))
-    x = Dense(10, activation="sigmoid")(inp)
-    x = Dense(20, activation="sigmoid")(x)
-    x = Dense(30, activation="sigmoid")(x)
+    x = Dense(64, activation="sigmoid")(inp)
+    x = Dense(64, activation="sigmoid")(x)
     mean = Dense(OUTPUT_DIMENSIONALITY, activation="linear")(x)
     var = Dense(OUTPUT_DIMENSIONALITY, activation="softplus")(x)
 
@@ -23,9 +22,6 @@ def mlp_model():
     train_model.compile(loss=regression_gaussian_nll_loss(var), optimizer="adam")
 
     return train_model, pred_model
-
-
-
 
 def check_settling_time(prediction, goal):
     # Ensure both arrays have at least 20 entries
@@ -41,7 +37,9 @@ def check_settling_time(prediction, goal):
 
     # Check if the average error across all dimensions is within the 2% error band
     for val1, val2 in zip(last_20_prediction, last_20_goal):
-
+        #check if any value in val2 is close to zero, if so continue
+        if np.any(np.isclose(val2, 0)):
+            continue
         errors = np.abs((val1 - val2) / val2)  # Calculate the percentage error for each dimension
         avg_error = np.mean(errors)  # Calculate the average error across all dimensions
         if avg_error > max_average_error:

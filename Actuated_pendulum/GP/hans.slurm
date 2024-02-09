@@ -4,11 +4,11 @@
 #SBATCH --partition=gpu # gpu, kill-shared, shared
 
 #SBATCH --gres=gpu:1 #1 GPU
-#SBATCH --cpus-per-task=1 # Number of cores; probably don't need to change this
-#SBATCH --mem=12gb ## max amount of memory per node you require in gb
-#SBATCH --time=00-08:00:00 ## time format is DD-HH:MM:SS, 3day max on kill-shared
+#SBATCH --cpus-per-task=4 # Number of cores; probably don't need to change this
+#SBATCH --mem=20gb ## max amount of memory per node you require in gb
+#SBATCH --time=03-00:00:00 ## time format is DD-HH:MM:SS, 3day max on kill-shared
 
-#SBATCH --job-name=actuated_pendulum_gp #Not necessary but any name
+#SBATCH --job-name=gp_actuated_pendulum #Not necessary but any name
 #SBATCH --output=./slurm-output-%A.out #Output file
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=hansm@hawaii.edu
@@ -26,4 +26,9 @@ source ~/auto.profile # Bash script that initializes Anaconda
 # python script_name.py
 
 # If you want to run a bash script:
-source /home/hansm/active_learning/Actuated_pendulum/GP/gp.sh
+
+# Read the file paths from the temporary file into an array
+mapfile -t filepaths < filepaths.txt
+
+# Execute the bash script
+source ${filepaths[0]}

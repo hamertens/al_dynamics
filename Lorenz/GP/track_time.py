@@ -6,4 +6,4 @@ import pandas as pd
 execution_time = sys.argv[1]
 
 df = pd.DataFrame({'Time': [execution_time]})
-df.to_csv('time.csv', index=False)
+df.to_csv('output_data/time.csv', index=False)

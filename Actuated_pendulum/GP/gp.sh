@@ -1,28 +1,28 @@
 #!/bin/bash
 
 
-source activate gp
+# Read the file paths from the temporary file into an array
+mapfile -t filepaths < filepaths.txt
+
+source activate ${filepaths[3]}
 
 
 # Start tracking time
 start_time=$(date +%s)
 
-# Path to the init Python script
-python_script_init="/home/hansm/active_learning/Actuated_pendulum/GP/init.py"
-python3 $python_script_init
+# Execute the init Python script
+python ${filepaths[1]}
 
-# Path to the loop Python script
-python_script_exec="/home/hansm/active_learning/Actuated_pendulum/GP/exec.py"
+
 
 # Loop x times
 
-for ((i=1; i<=500; i++))
+for ((i=1; i<=3500; i++))
 do
-    output=$(python $python_script_exec)
+    python ${filepaths[2]}
 
-    
-    if [ "$output" == "True" ]; then
-        break
+    if [ $? -ne 0 ]; then
+      break
     fi
 done
 

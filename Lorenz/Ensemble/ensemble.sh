@@ -11,12 +11,12 @@ start_time=$(date +%s)
 mapfile -t filepaths < filepaths.txt
 
 # Execute the init Python script
-#python ${filepaths[1]}
+python ${filepaths[1]}
 
 
 # Loop x times
 
-for ((i=1; i<=3000; i++))
+for ((i=1; i<=4000; i++))
 do
     # Execute the exec Python script
     python3 ${filepaths[2]}

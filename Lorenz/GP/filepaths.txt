@@ -1,0 +1,4 @@
+/home/hansm/active_learning/Lorenz/GP/gp.sh
+/home/hansm/active_learning/Lorenz/GP/init.py
+/home/hansm/active_learning/Lorenz/GP/exec.py
+gp

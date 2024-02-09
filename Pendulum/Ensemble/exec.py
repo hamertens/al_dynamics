@@ -39,7 +39,7 @@ model_predictions = df_predictions.values
 
 
 # Set the number of iterations
-epochs = 500
+epochs = 2000
 # Train on current inputs and outputs
 model = DeepEnsembleRegressor(mlp_model, 5)
 model.fit(training_inputs, training_outputs, epochs=epochs)

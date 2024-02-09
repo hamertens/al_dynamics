@@ -1,0 +1,4 @@
+/home/hansm/active_learning/Lorenz/BNN/bnn.sh
+/home/hansm/active_learning/Lorenz/BNN/init.py
+/home/hansm/active_learning/Lorenz/BNN/exec.py
+bnn

@@ -1,13 +1,14 @@
 import pandas as pd
 import random
 import numpy as np
-import deepxde as dde
+from setup import DATA_FILEPATH, DATAFRAME_COLUMNS_INPUT, DATAFRAME_COLUMNS_OUTPUT
+from models_functions import train_dropout_model
 
-file_path_train_inputs = '/home/hansm/active_learning/Pendulum/BNN/data/train_inputs.csv'
+file_path_train_inputs = DATA_FILEPATH + 'train_inputs.csv'
 df_train_inputs = pd.read_csv(file_path_train_inputs)
 train_inputs = df_train_inputs.values
 
-file_path_train_outputs = '/home/hansm/active_learning/Pendulum/BNN/data/train_outputs.csv'
+file_path_train_outputs = DATA_FILEPATH + 'train_outputs.csv'
 df_train_outputs = pd.read_csv(file_path_train_outputs)
 train_outputs = df_train_outputs.values
 
@@ -26,45 +27,19 @@ training_inputs = np.array([train_inputs[random_index1], train_inputs[random_ind
 training_outputs = np.array([train_outputs[random_index1], train_outputs[random_index2]])
 
 # Creating DataFrames for training inputs and outputs
-training_inputs_active_df = pd.DataFrame(training_inputs, columns=['theta', 'omega'])
-training_outputs_active_df = pd.DataFrame(training_outputs, columns=['theta', 'omega'])
+training_inputs_active_df = pd.DataFrame(training_inputs, columns=DATAFRAME_COLUMNS_INPUT)
+training_outputs_active_df = pd.DataFrame(training_outputs, columns=DATAFRAME_COLUMNS_OUTPUT)
 
 # Saving DataFrames to CSV files
-training_inputs_active_df.to_csv('training_inputs_active.csv', index=False)
-training_outputs_active_df.to_csv('training_outputs_active.csv', index=False)
+training_inputs_active_df.to_csv('output_data/training_inputs_active.csv', index=False)
+training_outputs_active_df.to_csv('output_data/training_outputs_active.csv', index=False)
 
 metric_df = pd.DataFrame({'RMSE': [], 'Variance': []})
-metric_df.to_csv("metrics.csv", index=False)
-
-# Define the BNN
-def train_dropout_model(x_train, y_train, x_test, y_test):
-
-  layer_size = [2] + [50] * 3 + [2]
-  activation = "sigmoid"
-  initializer = "Glorot uniform"
-  regularization = ["l2", 1e-5]
-  dropout_rate = 0.01
-  net = dde.nn.FNN(
-      layer_size,
-      activation,
-      initializer,
-      regularization,
-      dropout_rate
-  )
-  data = dde.data.DataSet(X_train=x_train, y_train=y_train, X_test=x_test, y_test=y_test)
-  BNN_model = dde.Model(data, net)
-  BNN_uncertainty = dde.callbacks.DropoutUncertainty(period=1000)
-  BNN_model.compile("adam", lr=0.001, metrics=["l2 relative error"])
-
-  losshistory, train_state = BNN_model.train(iterations=1000, callbacks= [BNN_uncertainty])
-  del losshistory
-  del data
-  del net
-  return train_state, BNN_model
+metric_df.to_csv("output_data/metrics.csv", index=False)
 
 
 train_state, model = train_dropout_model(training_inputs, training_outputs, training_inputs, training_outputs)
 # Add initial predictions
 predictions = train_state.y_pred_test
-predictions_df = pd.DataFrame(predictions, columns=['theta', 'omega'])
-predictions_df.to_csv('predictions.csv', index=False)
+predictions_df = pd.DataFrame(predictions, columns=DATAFRAME_COLUMNS_OUTPUT)
+predictions_df.to_csv('output_data/predictions.csv', index=False)
