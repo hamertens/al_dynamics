@@ -1,3 +1,4 @@
 slurm-output-*.out
 .ipynb_checkpoints/
 __pycache__/
+output_data/*.csv
