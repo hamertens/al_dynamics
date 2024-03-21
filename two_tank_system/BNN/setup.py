@@ -1,6 +1,13 @@
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+base_dir = os.path.dirname(current_dir)
+bnn_dir = os.path.join(base_dir, 'BNN')
+data_dir = os.path.join(base_dir, 'data')
+
 # Define specifications for the model and dynamic system
-FOLDER_FILEPATH = "/home/hansm/active_learning/two_tank_system/BNN/"
-DATA_FILEPATH = "/home/hansm/active_learning/two_tank_system/data/"
+FOLDER_FILEPATH = bnn_dir + os.sep
+DATA_FILEPATH = data_dir + os.sep
 INPUT_DIMENSIONALITY = 3
 OUTPUT_DIMENSIONALITY = 2
 DATAFRAME_COLUMNS_INPUT  = ['h1', 'h2', "q"]
@@ -9,13 +16,13 @@ DATAFRAME_COLUMNS_OUTPUT  = ['h1', 'h2']
 #name of anaconda environment
 env_name = "bnn" 
 
-ensemble_bash_filepath = "/home/hansm/active_learning/two_tank_system/BNN/bnn.sh"
+ensemble_bash_filepath = os.path.join(bnn_dir, "bnn.sh")
 
 # Path to the init Python script
-python_script_init="/home/hansm/active_learning/two_tank_system/BNN/init.py"
+python_script_init = os.path.join(bnn_dir, "init.py")
 
 # Path to the loop Python script
-python_script_exec="/home/hansm/active_learning/two_tank_system/BNN/exec.py"
+python_script_exec = os.path.join(bnn_dir, "exec.py")
 
 # List of file paths
 filepaths = [ensemble_bash_filepath, python_script_init, python_script_exec, env_name]
