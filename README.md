@@ -9,7 +9,7 @@ In training_inputs_active.csv and training_outputs_active.csv the training datap
 When final_iterations are reached track_time.py is executed to track the total execution time.
 The models_functions.py file contains the classes for the ML models, function to train and evaluate them and check_settling_time functon to check if the model has converged.
 
-In the setup.py file, the user can specify all the different parameters that are used by the other python files.
+In the setup.py file, the user can specify all the different parameters that are used by the other python files. Once all specifications are added, the setup.py file needs to executed once to create the filepaths.txt file.
 
 Currently, I'm using 4 different anaconda environments for the individual ML models. You can find the yml files in this repo to install the environments and run the code.
 
