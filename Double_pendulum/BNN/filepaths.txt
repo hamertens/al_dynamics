@@ -1,0 +1,4 @@
+/home/hansm/active_learning/Double_pendulum/BNN/bnn.sh
+/home/hansm/active_learning/Double_pendulum/BNN/init.py
+/home/hansm/active_learning/Double_pendulum/BNN/exec.py
+bnn
