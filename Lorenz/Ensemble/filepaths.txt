@@ -1,4 +1,0 @@
-/home/hansm/active_learning/Lorenz/Ensemble/ensemble.sh
-/home/hansm/active_learning/Lorenz/Ensemble/init.py
-/home/hansm/active_learning/Lorenz/Ensemble/exec.py
-ensemble
