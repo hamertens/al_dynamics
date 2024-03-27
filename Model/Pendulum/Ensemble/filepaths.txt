@@ -1,4 +1,0 @@
-/home/linda68/active_learning/Pendulum/Ensemble/ensemble.sh
-/home/linda68/active_learning/Pendulum/Ensemble/init.py
-/home/linda68/active_learning/Pendulum/Ensemble/exec.py
-ensemble
