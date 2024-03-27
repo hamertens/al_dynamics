@@ -1,0 +1,4 @@
+/home/linda68/active_learning/Lorenz/Ensemble/ensemble.sh
+/home/linda68/active_learning/Lorenz/Ensemble/init.py
+/home/linda68/active_learning/Lorenz/Ensemble/exec.py
+ensemble

@@ -1,0 +1,4 @@
+/home/linda68/active_learning/Lorenz/GP/gp.sh
+/home/linda68/active_learning/Lorenz/GP/init.py
+/home/linda68/active_learning/Lorenz/GP/exec.py
+gp

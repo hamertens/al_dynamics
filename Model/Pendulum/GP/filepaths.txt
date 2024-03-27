@@ -1,0 +1,4 @@
+/home/linda68/active_learning/Pendulum/GP/gp.sh
+/home/linda68/active_learning/Pendulum/GP/init.py
+/home/linda68/active_learning/Pendulum/GP/exec.py
+gp

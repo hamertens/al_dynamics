@@ -1,0 +1,4 @@
+/home/hansm/active_learning/Lorenz/Ensemble_continuous/ensemble.sh
+/home/hansm/active_learning/Lorenz/Ensemble_continuous/init.py
+/home/hansm/active_learning/Lorenz/Ensemble_continuous/exec.py
+ensemble_cont

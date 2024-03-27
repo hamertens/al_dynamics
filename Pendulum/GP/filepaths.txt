@@ -1,4 +1,0 @@
-/home/hansm/active_learning/Pendulum/GP/gp.sh
-/home/hansm/active_learning/Pendulum/GP/init.py
-/home/hansm/active_learning/Pendulum/GP/exec.py
-gp
