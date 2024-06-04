@@ -1,0 +1,32 @@
+#!/bin/bash
+
+env_name="gp"
+
+source activate $env_name
+
+
+# Start tracking time
+start_time=$(date +%s)
+
+# Execute the init Python script
+python init.py
+
+
+# Loop x times
+
+for ((i=1; i<=100; i++))
+do
+    # Execute the exec Python script
+    python3 active_learning.py
+
+    if [ $? -ne 0 ]; then
+      break
+    fi
+done
+
+# Calculate the execution time
+end_time=$(date +%s)
+execution_time=$((end_time - start_time))
+
+# Pass the execution time to the Python script
+python3 utils/track_time.py "$execution_time"
