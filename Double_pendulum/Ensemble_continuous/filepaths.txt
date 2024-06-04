@@ -1,4 +1,0 @@
-/home/hansm/active_learning/Double_pendulum/Ensemble_continuous/ensemble.sh
-/home/hansm/active_learning/Double_pendulum/Ensemble_continuous/init.py
-/home/hansm/active_learning/Double_pendulum/Ensemble_continuous/exec.py
-ensemble_cont

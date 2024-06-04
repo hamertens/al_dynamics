@@ -1,4 +1,0 @@
-/home/hansm/active_learning/Double_pendulum/BNN_cont/bnn.sh
-/home/hansm/active_learning/Double_pendulum/BNN_cont/init.py
-/home/hansm/active_learning/Double_pendulum/BNN_cont/exec.py
-bnn
