@@ -81,8 +81,6 @@ elif model_type == "ensemble":
     model = ensemble.Ensemble(training_type, sample_inputs, sample_outputs, test_inputs, test_outputs, training_inputs, training_outputs, hps)
 elif model_type == "gp":
     from models import gp
-    kernel_type = "rbf"
-    #kernel_type = "matern"
     model = gp.GP(training_type, kernel_type, sample_inputs, sample_outputs, test_inputs, test_outputs, training_inputs, training_outputs)
 
 

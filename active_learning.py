@@ -40,11 +40,6 @@ test_outputs = system.load_test_outputs()
 # Read the active learning training inputs, training outputs and predictions from the CSV files
 training_inputs, training_outputs, predictions = functions.read_csv_files()
 
-# Initialize the model
-#training_type = "continuous"
-#model_type = "mcdropout"
-#model_type = "ensemble"
-#model_type = "gp"
 
 if model_type == "mcdropout":
     from models import mcdropout
@@ -56,8 +51,6 @@ elif model_type == "ensemble":
     model = ensemble.Ensemble(training_type, sample_inputs, sample_outputs, test_inputs, test_outputs, training_inputs, training_outputs, hps)
 elif model_type == "gp":
     from models import gp
-    kernel_type = "rbf"
-    #kernel_type = "matern"
     model = gp.GP(training_type, kernel_type, sample_inputs, sample_outputs, test_inputs, test_outputs, training_inputs, training_outputs)
 
 max_index, new_prediction, variance, RMSE = model.active_learning()
