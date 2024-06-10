@@ -12,6 +12,7 @@ class MCDropout:
         self.training_type = training_type
         self.output_data_dir = os.path.join(os.path.dirname(__file__), '..', 'output_data')
         self.learning_rate = hps['lr']
+        self.forward_passes = hps['forward_passes']
         self.num_neurons = hps['num_neurons']
         self.num_layers = hps['num_layers']
         self.epochs = hps['epochs']
@@ -43,7 +44,7 @@ class MCDropout:
         )
         data = dde.data.DataSet(X_train=self.training_inputs, y_train=self.training_outputs, X_test=self.sample_inputs, y_test=self.sample_outputs)
         BNN_model = dde.Model(data, net)
-        BNN_uncertainty = dde.callbacks.DropoutUncertainty(period=5000)
+        BNN_uncertainty = dde.callbacks.DropoutUncertainty(period=self.forward_passes)
         BNN_model.compile("adam", lr=self.learning_rate, metrics=["l2 relative error"])
         if self.training_type == "continuous":
             save_path = 'output_data/model/'
