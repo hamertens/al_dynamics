@@ -2,6 +2,7 @@ Implementation for Paper "Comparative Analysis of Uncertainty Quantification Mod
 Learning for Efficient System Identification of Dynamical Systems"
 
 All systems and models are implemented as modular classes. You can change the variables in al_dynamics.sh to run the code with the specific dynamical system, ml model, training type (and kernel type). al_dynamics.sh will execute init.py once and loop over active_learning.py. You can also run the python scripts like this:
+
 '''
 python active_learning.py --model gp --system lorenz --training continuous --kernel rbf
 '''
