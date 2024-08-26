@@ -79,6 +79,9 @@ class Ensemble:
 
 
         self.model.fit(self.training_inputs, self.training_outputs, epochs=self.epochs, batch_size = self.batch_size)
+        if self.training_type == "continuous":
+            self.model.save_weights(os.path.join(self.output_data_dir, 'ensemble_model_weights'))
+            self.model.save_weights_training(os.path.join(self.output_data_dir, 'ensemble_model_weights_training'))
         max_index, new_prediction, variance = self.find_max_uncertainty()
         #Append RMSE and variance
         prediction, _ = self.model.predict(self.test_inputs)
